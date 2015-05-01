@@ -17,7 +17,7 @@ public class Landscape {
 	static int[][] visited; // helper 2d array to keep track of visited points for BFS, 0 = unvisited, 1 = visited
 	static ArrayList<Lake> lakes = new ArrayList<Lake>(); // an arraylist of lakes, where lakes are just an arraylist of points
 		
-	// a point contains row and column indexes, and z value
+	// a point contains row and column indexes, z value, and a parent pointer for tracing shortest path
 	public static class Point{
 		int row, col, elev;
 		Point parent = null;
@@ -50,7 +50,7 @@ public class Landscape {
 		// computes surface area of lake
 		public int computeSA(){
 			return lake.size();
-		}		
+		}
 		// computes volume of lake
 		public int computeVol(){
 			int volume = 0;
@@ -167,8 +167,8 @@ public class Landscape {
 		
 		// while the queue is not empty
 		while(!q.isEmpty()){
-			p = q.poll(); // dequeue the point
-			// this point is point b! exit
+			p = q.poll(); // dequeue point p
+			// point p is point b, exit
 			if(p.row == b.row && p.col == b.col){
 				break;
 			}

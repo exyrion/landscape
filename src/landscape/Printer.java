@@ -2,7 +2,6 @@ package landscape;
 
 import java.util.ArrayList;
 
-import landscape.Landscape.Lake;
 
 public class Printer {
 	
@@ -37,8 +36,7 @@ public class Printer {
 		for(int i = 0; i < lakes.size(); i++){
 			int lakeNum = i+1;
 			System.out.println("Lake #" + lakeNum);
-			Lake curLake = lakes.get(i);
-			curLake.printLake();
+			lakes.get(i).printLake();
 		}
 	}
 }
