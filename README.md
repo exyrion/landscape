@@ -29,7 +29,7 @@ My test file is generated as follows:
 ### High Level Algorithm Overview
 1. Parse test file and populate global variables
 2. findLakes() - Iterate through each point in the grid and check to see if it contains water and if the point is unvisited. If so, perform a BFS on the point. 
-3. BFS(int i, int j) - Perform an optimized semi-BFS on the point (this BFS only needs to check points below and to the right of current point to find all the lakes) to find all adjacent points that contain water. Store points in a Lake, store Lake in ArrayList<Lake> lakes.
+3. BFS(int i, int j) - Perform an BFS on the point to find all adjacent points that contain water. Store points in a Lake, store Lake in ArrayList<Lake> lakes.
 4. findLargestSALake() - Iterate through ArrayList<Lake> lakes to find lake with largest surface
 5. findLargestVolLake() - Iterate through ArrayList<Lake> lakes to find lake with largest volume
 6. findPath() - Clear the visited grid and set all values back to 0 (unvisited). Perform a BFS starting from Point A, but this time, keep track of each Point P that discovered the Point newP using the parent pointer. Check to see if each dequeued Point is Point B. If so, exit the loop. Retrace the path from Point B back to Point A using each Point's parent pointer and add the Points into ArrayList<Point> path. Print out ArrayList<Point> path in reverse order to get the shortest path from Point A to Point B.

@@ -82,7 +82,7 @@ public class Landscape {
 		}
 	}
 	
-	// performs a semi breadth first search to find all adjacent points that are filled with water and unvisited
+	// performs a breadth first search to find all adjacent points that are filled with water and unvisited
 	// returns a Lake
 	public static Lake BFS(int i, int j){
 		Lake lake = new Lake(); // create the lake
@@ -95,14 +95,27 @@ public class Landscape {
 		// while the queue is not empty
 		while(!q.isEmpty()){
 			p = q.poll(); // dequeue the point			
-			// check points for 3 conditions: (1) not out of bounds (2) not visited (3) below water level
-			// only need to check points below and to the right
+			// check points for 3 conditions: (1) not out of bounds (2) not visited (3) below water level			
+			//check point above p
+			if((p.row-1 < rowSize) && (visited[p.row-1][p.col] == 0) && (landscape[p.row-1][p.col] < w)){ 
+				Point newP = new Point(p.row-1, p.col, landscape[p.row-1][p.col]); // create the new point
+				lake.addPoint(newP); // add the new point to the lake
+				visited[newP.row][newP.col] = 1; // mark the new point as visited
+				q.offer(newP); // enqueue the new point
+			}
 			// check point below p
 			if((p.row+1 < rowSize) && (visited[p.row+1][p.col] == 0) && (landscape[p.row+1][p.col] < w)){ 
 				Point newP = new Point(p.row+1, p.col, landscape[p.row+1][p.col]); // create the new point
 				lake.addPoint(newP); // add the new point to the lake
 				visited[newP.row][newP.col] = 1; // mark the new point as visited
 				q.offer(newP); // enqueue the new point
+			}
+			// check point left of p
+			if((p.col-1 < colSize) && (visited[p.row][p.col-1] == 0) && (landscape[p.row][p.col-1] < w)){ 
+				Point newP = new Point(p.row, p.col-1, landscape[p.row][p.col-1]);
+				lake.addPoint(newP);
+				visited[newP.row][newP.col] = 1;
+				q.offer(newP);
 			}
 			// check point right of p
 			if((p.col+1 < colSize) && (visited[p.row][p.col+1] == 0) && (landscape[p.row][p.col+1] < w)){ 
